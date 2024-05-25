@@ -1,1 +1,1 @@
-az ad user delete --display-name "Jeff Baker" --user-principal-name Jeff.Baker@shyamkcs16sahyadriedu.onmicrosoft.com 
+az ad user delete --id Jeff.Baker@shyamkcs16sahyadriedu.onmicrosoft.com
