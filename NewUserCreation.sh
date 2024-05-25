@@ -1,0 +1,1 @@
+az ad user create --display-name "John Doe" --user-principal-name john.doe@shyamkcs16sahyadriedu.onmicrosoft.com --password "Pass@12345"

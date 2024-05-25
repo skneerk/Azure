@@ -1,0 +1,63 @@
+Users creation using powershell
+1.	
+2.	Connect to Microsoft Graph:
+o	Before you start, install and connect to the Microsoft Graph PowerShell module.
+o	Run the following commands in an elevated PowerShell session:
+o	Install-Module Microsoft.Graph -Force
+o	Install-Module Microsoft.Graph.Beta -AllowClobber -Force
+o	Connect-MgGraph -Scopes "User.ReadWrite.All"
+o	Make sure to update both modules to the latest version.
+3.	Required Attributes for User Creation:
+o	To create a Microsoft Entra ID user, you need the following minimum attributes:
+	DisplayName
+	MailNickname
+	UserPrincipalName
+	PasswordProfile
+	AccountEnabled
+4.	Create a User:
+o	Use the New-MgUser cmdlet to create a new Microsoft Entra ID user.
+o	Example:
+o	# Create password profile
+o	$PasswordProfile = @{
+o	    Password = "P@ssw0rd!"
+o	    ForceChangePasswordNextSignIn = $true
+o	    ForceChangePasswordNextSignInWithMfa = $true
+o	}
+o	
+o	# Create Microsoft Entra ID user
+o	$UserParams = @{
+o	    DisplayName = "Jeff Baker"
+o	    MailNickName = "Jeff.Baker"
+o	    UserPrincipalName = "Jeff.Baker@exoip.com"
+o	    PasswordProfile = $PasswordProfile
+o	    AccountEnabled = $true
+o	}
+o	
+o	New-MgUser @UserParams
+o	After running the command, it will show the output that the user is successfully created.
+
+To create users in Microsoft Entra ID using Azure Cloud Shell with Bash, follow these steps:
+1.	Understand User Types:
+o	Before creating users, familiarize yourself with the different user types in Microsoft Entra:
+	Internal member: Full-time employees within your organization.
+	Internal guest: Users with guest-level privileges (created before B2B collaboration availability).
+	External member: Authenticate using an external account and have member access.
+	External guest: True guests who authenticate externally and have guest-level privileges.
+2.	Connect to Azure Cloud Shell:
+o	Open the Azure portal.
+o	Click on Cloud Shell in the top navigation.
+o	Choose Bash as your shell environment.
+3.	Create a New User:
+o	Use the following command to create a new user (replace placeholders with actual values):
+o	az ad user create --display-name "John Doe" --user-principal-name john.doe@yourtenant.onmicrosoft.com --password "YourPassword" --force-change-password-next-login true
+	--display-name: User’s full name.
+	--user-principal-name: User’s UPN (email address).
+	--password: Initial password for the user.
+	--force-change-password-next-login: Forces the user to change their password on first login.
+4.	Invite an External Guest:
+o	To invite an external guest, use the following command (replace placeholders):
+o	az ad user invite --user-id john.doe@externaldomain.com --invite-redirect-url "https://yourapp.com"
+	--user-id: External user’s email address.
+	--invite-redirect-url: URL where the user will be redirected after accepting the invitation.
+5.	Verify Users:
+o	Confirm that the users were successfully created or invited in the Microsoft Entra admin center.
